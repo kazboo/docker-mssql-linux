@@ -1,0 +1,33 @@
+version: '3.7'
+services: 
+  db:
+    container_name: 'db_mssql'
+    build: 
+      context: ./db
+      dockerfile: DockerFile
+    ports:
+      - 1433:1433
+    # https://docs.microsoft.com/ja-jp/sql/linux/sql-server-linux-configure-environment-variables?view=sql-server-ver15
+    environment:
+      # 使用許諾契約書の承諾
+      - ACCEPT_EULA=Y
+      # SA ユーザーのパスワード(8字以上英数字記号大文字小文字)
+      - SA_PASSWORD=Zks57d2fLOsd10mOm
+      # SQL Server のエディションまたはプロダクトキー
+      - MSSQL_PID=Express
+      # SQL Server に使用する言語 ID
+      - MSSQL_LCID=1041
+      # SQL Server の既定の照合順序
+      - MSSQL_COLLATION=Japanese_CI_AS
+    volumes:
+      # 名前付きボリューム
+      - vol_db_mssql:/var/opt/mssql 
+      # Error occurred after [Setup step is copying system data file 'C:\templatedata\master.mdf' to '/var/opt/mssql/data/master.mdf'.]
+      # - ./mount/data:/var/opt/mssql/data 
+      # - ./mount/log:/var/opt/mssql/log
+      # - ./mount/secrets:/var/opt/mssql/secrets
+# https://docs.docker.com/storage/volumes/
+volumes:
+  vol_db_mssql:
+    driver: local
+    

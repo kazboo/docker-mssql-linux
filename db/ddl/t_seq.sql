@@ -1,0 +1,18 @@
+USE [TEST_DB]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[T_SEQ](
+    [TYPE] [int] NOT NULL,
+    [CURRENT_NO] [int] NOT NULL,
+    [MAX_NO] [int] NOT NULL,
+    [MIN_NO] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
